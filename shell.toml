@@ -1,0 +1,93 @@
+# Omarchy Quattro surfaces for Intaglio (1-Bit).
+
+[bar]
+background = "#101112"
+background-alpha = 1.0
+text = "#F4F4EE"
+active = "#F4F4EE"
+scale-with-font = true
+
+[hyprland]
+active-border = "#F4F4EE"
+active-border-foreground = "#101112"
+
+[popups]
+background = "#101112"
+background-alpha = 1.0
+text = "#F4F4EE"
+border = "hyprland.active-border"
+border-alpha = 1.0
+border-width = 2
+
+[tooltip]
+background = "#101112"
+background-alpha = 1.0
+text = "#F4F4EE"
+border = "hyprland.active-border"
+border-alpha = 1.0
+
+[notifications]
+background = "#101112"
+background-alpha = 1.0
+text = "#F4F4EE"
+border = "hyprland.active-border"
+border-alpha = 1.0
+border-width = 2
+countdown = "#F4F4EE"
+
+[launcher]
+background = "#101112"
+background-alpha = 1.0
+text = "#F4F4EE"
+border = "hyprland.active-border"
+border-alpha = 1.0
+border-width = 2
+scrim = "#050506"
+scrim-alpha = 0.6
+selected-background = "#F4F4EE"
+selected-background-alpha = 0.15
+selected-text = "#FFFFFF"
+selected-border = "hyprland.active-border"
+selected-border-alpha = 0.8
+
+[menu]
+background = "#101112"
+background-alpha = 1.0
+text = "#F4F4EE"
+border = "hyprland.active-border"
+border-alpha = 1.0
+border-width = 2
+scrim = "#050506"
+scrim-alpha = 0.6
+selected-background = "#F4F4EE"
+selected-background-alpha = 0.15
+selected-text = "#FFFFFF"
+selected-border = "hyprland.active-border"
+selected-border-alpha = 0.8
+
+[polkit]
+background = "#101112"
+background-alpha = 1.0
+text = "#F4F4EE"
+text-error = "#E05545"
+border = "hyprland.active-border"
+border-error = "#E05545"
+border-alpha = 1.0
+border-width = 2
+scrim = "#050506"
+scrim-alpha = 0.6
+accent = "#F4F4EE"
+
+[lock]
+background = "#101112"
+background-alpha = 0.95
+text = "#F4F4EE"
+placeholder = "#F4F4EE88"
+text-error = "#E05545"
+border = "hyprland.active-border"
+border-active = "hyprland.active-border"
+border-error = "#E05545"
+border-alpha = 1.0
+border-width = 2
+selection = "#F4F4EE"
+selection-alpha = 0.3

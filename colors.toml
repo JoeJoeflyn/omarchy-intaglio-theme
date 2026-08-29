@@ -1,0 +1,34 @@
+mode = "dark"
+
+accent = "#F4F4EE"
+selection = "#242424"
+muted = "#666666"
+
+background = "#101112"
+dark_background = "#0A0A0C"
+darker_background = "#050506"
+lighter_background = "#1A1B1D"
+
+foreground = "#F4F4EE"
+dark_foreground = "#888884"
+light_foreground = "#FAF9F5"
+bright_foreground = "#FFFFFF"
+
+# 1-bit & classical monochrome tonal family
+magenta = "#B8869E"
+cyan = "#88B8B5"
+blue = "#7D9BB8"
+green = "#6BAA75"
+
+# warm contrast & archival inks
+red = "#E05545"
+yellow = "#E5B84B"
+orange = "#E58A4B"
+brown = "#5C4838"
+
+bright_magenta = "#D8A4BE"
+bright_cyan = "#A0D8D5"
+bright_blue = "#98BEE0"
+bright_green = "#85C990"
+bright_red = "#FF6B5A"
+bright_yellow = "#FFD166"
