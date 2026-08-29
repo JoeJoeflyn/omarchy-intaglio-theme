@@ -14,26 +14,40 @@ const float bayer4x4[16] = float[16](
     15.0/16.0,  7.0/16.0, 13.0/16.0,  5.0/16.0
 );
 
-// 6 levels per channel = 216 rich retro color steps
-const float COLOR_LEVELS = 6.0;
+// 8 quantized palette steps for smooth retro gradients without color banding noise
+const float LEVELS = 8.0;
 
 void main() {
     vec4 src = texture(tex, v_texcoord);
 
-    // Pixel coordinates for Bayer lookup
+    // 1. Calculate luminance (perceived brightness) & chroma (color saturation)
+    float luma = dot(src.rgb, vec3(0.2126, 0.7152, 0.0722));
+    float maxC = max(src.r, max(src.g, src.b));
+    float minC = min(src.r, min(src.g, src.b));
+    float chroma = maxC - minC;
+
+    // 2. 4x4 Bayer Matrix lookup
     int x = int(gl_FragCoord.x) % 4;
     int y = int(gl_FragCoord.y) % 4;
     float bayer = bayer4x4[y * 4 + x] - 0.5;
 
-    float stepSize = 1.0 / (COLOR_LEVELS - 1.0);
-    float ditherSpread = stepSize * 0.75;
+    // 3. Luminance-Coordinated Dithering (Prevents rainbow chromatic noise on dark apps like Discord/Vesktop)
+    float stepSize = 1.0 / (LEVELS - 1.0);
+    float ditherSpread = stepSize * 0.65;
 
-    // Apply authentic Bayer dither everywhere (terminal, windows, wallpapers, text)
-    vec3 dithered = src.rgb + vec3(bayer * ditherSpread);
+    float ditheredLuma = luma + bayer * ditherSpread;
+    float qLuma = floor(ditheredLuma * (LEVELS - 1.0) + 0.5) / (LEVELS - 1.0);
+    qLuma = clamp(qLuma, 0.0, 1.0);
 
-    // Quantize into crisp retro color palette
-    vec3 quantized = floor(dithered * (COLOR_LEVELS - 1.0) + 0.5) / (COLOR_LEVELS - 1.0);
-    quantized = clamp(quantized, 0.0, 1.0);
-
-    fragColor = vec4(quantized, src.a);
+    // 4. Output color:
+    // If neutral gray / monochrome (like Discord dark background, text, UI panels):
+    // Output pure neutral quantized grayscale to eliminate color fringing
+    if (chroma < 0.06) {
+        fragColor = vec4(vec3(qLuma), src.a);
+    } else {
+        // For colored graphics, avatars, and UI badges:
+        // Scale RGB proportionally by quantized luminance to preserve true hue
+        vec3 colorDither = src.rgb * (qLuma / max(luma, 0.001));
+        fragColor = vec4(clamp(colorDither, 0.0, 1.0), src.a);
+    }
 }
