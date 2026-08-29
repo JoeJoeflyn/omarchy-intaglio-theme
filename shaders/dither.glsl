@@ -31,20 +31,21 @@ void main() {
     float minC = min(src.r, min(src.g, src.b));
     float delta = maxC - minC;
 
-    // 1. TEXT CLARITY: Solid white for bright text glyphs
-    if (luma > 0.90 && delta < 0.10) {
-        fragColor = vec4(1.0, 1.0, 1.0, src.a);
+    // 1. TEXT CLARITY PROTECTION:
+    // Pure bright text strokes stay solid crisp white
+    if (luma > 0.88 && delta < 0.12) {
+        fragColor = vec4(0.96, 0.96, 0.94, src.a);
         return;
     }
-    // Deep black for pure dark backgrounds
-    if (luma < 0.03 && delta < 0.05) {
-        fragColor = vec4(0.0, 0.0, 0.0, src.a);
+    // Pure dark text strokes & backgrounds stay solid deep black
+    if (luma < 0.08 && delta < 0.08) {
+        fragColor = vec4(0.04, 0.04, 0.05, src.a);
         return;
     }
 
     // 2. STRONG COLOR DITHERING (Prominent Crosshatch Texture on Everything)
     float stepSize = 1.0 / (COLOR_LEVELS - 1.0);
-    float ditherSpread = stepSize * 1.0; // Full-strength dither amplitude
+    float ditherSpread = stepSize * 0.90;
 
     // Apply RGB Bayer dither to each color channel
     vec3 dithered = src.rgb + vec3(bayer * ditherSpread);
