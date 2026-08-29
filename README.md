@@ -56,6 +56,7 @@ The lockscreen features an antique 1800s pocket watch compass emblem with Roman 
 - `colors.toml` — Master semantic palette driving all Omarchy native templates.
 - `hyprland.lua` — Razor-sharp `0px` corner rounding, 2px crisp paper-white borders (`#F4F4EE`), disabled blur and soft shadows.
 - `shell.toml` — Full Quickshell Quattro surface mapping for status bar, launcher, notifications, popups, and lockscreen.
+- `shaders/dither.glsl` — Real-time GPU Bayer matrix color dither fragment shader for Hyprland.
 - `backgrounds/` — 4 curated 1-bit dithered wallpapers (`1.jpg`–`4.jpg`).
 - `unlock.png` & `preview-unlock.png` — Branded 1-bit pocket watch lockscreen and Plymouth boot artwork.
 - `preview.png` — 1920x1080 theme selector preview card.
